@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
+<title>Eliminar cuenta · PharmaStore</title>
+<meta name="description" content="Solicita la eliminación de tu cuenta de la aplicación PharmaStore. Conoce qué datos se eliminan, cuáles se conservan y en qué plazos.">
+<meta property="og:title" content="Eliminar cuenta · PharmaStore">
+<meta property="og:description" content="Cómo eliminar tu cuenta de la aplicación PharmaStore y qué ocurre con tus datos.">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --bg:#f4f6f8;
+    --surface:#ffffff;
+    --surface-2:#f8fafb;
+    --border:#dfe5ea;
+    --text:#16232c;
+    --text-soft:#5a6b78;
+    --brand:#0f7a6c;
+    --brand-dark:#0b5d52;
+    --brand-soft:#e6f4f1;
+    --danger:#c0392b;
+    --warn-soft:#fff6e5;
+    --warn-border:#f0c977;
+    --radius:14px;
+    --shadow:0 1px 2px rgba(16,35,44,.06), 0 8px 24px rgba(16,35,44,.07);
+    --font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0f1519;
+      --surface:#161f25;
+      --surface-2:#1b262d;
+      --border:#2a3941;
+      --text:#e8eef2;
+      --text-soft:#9db0bd;
+      --brand:#2fb3a0;
+      --brand-dark:#249384;
+      --brand-soft:#12302c;
+      --danger:#e5705f;
+      --warn-soft:#2e2415;
+      --warn-border:#6b5423;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+  body{
+    margin:0;font-family:var(--font);background:var(--bg);color:var(--text);
+    line-height:1.6;font-size:16px;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:24px 20px 64px}
+
+  header.site{display:flex;align-items:center;gap:14px;padding:20px 0 26px}
+  .mark{
+    width:46px;height:46px;flex:0 0 46px;border-radius:13px;
+    background:linear-gradient(140deg,var(--brand),var(--brand-dark));
+    display:grid;place-items:center;color:#fff;
+  }
+  .mark svg{width:26px;height:26px;display:block}
+  .brand-name{font-weight:700;font-size:1.15rem;letter-spacing:-.01em;line-height:1.2}
+  .brand-sub{font-size:.82rem;color:var(--text-soft);line-height:1.3}
+
+  h1{font-size:1.65rem;line-height:1.25;letter-spacing:-.02em;margin:0 0 10px}
+  h2{font-size:1.1rem;letter-spacing:-.01em;margin:0 0 14px}
+  h3{font-size:.95rem;margin:0 0 6px}
+  p{margin:0 0 14px}
+  .lead{color:var(--text-soft);margin-bottom:26px}
+
+  .card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:24px;box-shadow:var(--shadow);margin-bottom:22px;
+  }
+
+  /* Rutas de eliminación */
+  .route{
+    display:flex;gap:14px;align-items:flex-start;
+    padding:16px 0;border-top:1px solid var(--border);
+  }
+  .route:first-of-type{border-top:0;padding-top:4px}
+  .route-num{
+    flex:0 0 28px;width:28px;height:28px;border-radius:50%;
+    background:var(--brand-soft);color:var(--brand-dark);
+    display:grid;place-items:center;font-weight:700;font-size:.85rem;margin-top:2px;
+  }
+  @media (prefers-color-scheme: dark){ .route-num{color:var(--brand)} }
+  .route-body{flex:1;min-width:0}
+  .route-body p:last-child{margin-bottom:0}
+
+  ol.inapp{margin:0 0 0;padding-left:20px}
+  ol.inapp li{margin-bottom:4px}
+
+  /* Formulario mailto */
+  .field{margin-bottom:16px}
+  label{display:block;font-weight:600;font-size:.88rem;margin-bottom:6px}
+  .hint{font-size:.8rem;color:var(--text-soft);font-weight:400;margin-top:4px}
+  input[type=email],select,textarea{
+    width:100%;padding:11px 13px;font:inherit;font-size:.95rem;
+    color:var(--text);background:var(--surface-2);
+    border:1px solid var(--border);border-radius:10px;
+  }
+  textarea{min-height:84px;resize:vertical}
+  input:focus,select:focus,textarea:focus{
+    outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft);
+  }
+  .check{display:flex;gap:10px;align-items:flex-start;margin-bottom:18px;font-size:.9rem}
+  .check input{margin-top:4px;width:17px;height:17px;flex:0 0 17px;accent-color:var(--danger)}
+  .check label{font-weight:400;margin:0}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    width:100%;padding:12px 18px;font:inherit;font-weight:600;font-size:.95rem;
+    border:1px solid transparent;border-radius:10px;cursor:pointer;text-decoration:none;
+    transition:background .15s,opacity .15s;
+  }
+  .btn-primary{background:var(--brand);color:#fff}
+  .btn-primary:hover{background:var(--brand-dark)}
+  .btn-ghost{background:transparent;color:var(--text-soft);border-color:var(--border);margin-top:8px}
+  .btn-ghost:hover{background:var(--surface-2)}
+
+  .alert{padding:13px 15px;border-radius:10px;border:1px solid;font-size:.9rem;margin-bottom:16px}
+  .alert-warn{background:var(--warn-soft);border-color:var(--warn-border)}
+  .alert :last-child{margin-bottom:0}
+
+  .fallback{margin-top:18px}
+  .fallback pre{
+    background:var(--surface-2);border:1px solid var(--border);border-radius:10px;
+    padding:14px;font-size:.82rem;line-height:1.5;white-space:pre-wrap;
+    overflow-wrap:anywhere;margin:0 0 10px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+
+  ul.plain{margin:0 0 14px;padding-left:20px}
+  ul.plain li{margin-bottom:5px}
+  .muted{color:var(--text-soft);font-size:.88rem}
+  a{color:var(--brand-dark);font-weight:600;overflow-wrap:anywhere}
+  @media (prefers-color-scheme: dark){ a{color:var(--brand)} }
+
+  dl.facts{margin:0;display:grid;gap:14px}
+  dl.facts>div{border-left:3px solid var(--brand);padding-left:13px}
+  dl.facts dt{font-weight:600;font-size:.92rem;margin-bottom:2px}
+  dl.facts dd{margin:0;color:var(--text-soft);font-size:.9rem}
+
+  footer.site{
+    text-align:center;color:var(--text-soft);font-size:.82rem;
+    padding-top:14px;border-top:1px solid var(--border);
+  }
+  .hidden{display:none !important}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site">
+    <div class="mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3v18M3 12h18"/>
+      </svg>
+    </div>
+    <div>
+      <div class="brand-name">PharmaStore</div>
+      <div class="brand-sub">Salud que premia</div>
+    </div>
+  </header>
+
+  <h1>Eliminar tu cuenta</h1>
+  <p class="lead">
+    En esta página encontrarás cómo solicitar la eliminación de tu cuenta de la
+    aplicación <strong>PharmaStore</strong> y qué ocurre con tus datos personales
+    cuando lo haces.
+  </p>
+
+  <!-- =============== CÓMO ELIMINARLA =============== -->
+  <section class="card" aria-labelledby="how-title">
+    <h2 id="how-title">Cómo eliminar tu cuenta</h2>
+
+    <div class="route">
+      <div class="route-num" aria-hidden="true">1</div>
+      <div class="route-body">
+        <h3>Desde la aplicación</h3>
+        <ol class="inapp">
+          <li>Abre <strong>PharmaStore</strong> e inicia sesión.</li>
+          <li>Entra en <strong>Perfil</strong>.</li>
+          <li>Selecciona <strong>Eliminar cuenta</strong>.</li>
+          <li>Lee el aviso y confirma. Tu sesión se cerrará automáticamente.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="route">
+      <div class="route-num" aria-hidden="true">2</div>
+      <div class="route-body">
+        <h3>Por correo electrónico</h3>
+        <p class="muted" style="margin-bottom:0">
+          Si ya no tienes la aplicación instalada o perdiste el acceso a tu cuenta,
+          usa el formulario de abajo para enviarnos la solicitud.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== FORMULARIO =============== -->
+  <section class="card" aria-labelledby="form-title">
+    <h2 id="form-title">Solicitar la eliminación por correo</h2>
+
+    <div class="alert alert-warn">
+      <p><strong>Esta acción no es reversible.</strong> No podrás recuperar tu cuenta,
+      tu historial ni tus puntos acumulados una vez procesada la solicitud.</p>
+    </div>
+
+    <p class="muted">
+      Al pulsar el botón se abrirá tu aplicación de correo con el mensaje ya redactado.
+      <strong>Envíalo desde la misma dirección con la que te registraste</strong>: así
+      podemos verificar tu identidad sin pedirte más datos.
+    </p>
+
+    <form id="form">
+      <div class="field">
+        <label for="email">Correo electrónico de tu cuenta</label>
+        <input id="email" type="email" autocomplete="email" inputmode="email"
+               required placeholder="tucorreo@ejemplo.com">
+        <div class="hint">El mismo que usas para iniciar sesión en la app.</div>
+      </div>
+
+      <div class="field">
+        <label for="reason">Motivo <span style="font-weight:400;color:var(--text-soft)">(opcional)</span></label>
+        <select id="reason">
+          <option value="">Prefiero no decirlo</option>
+          <option>Ya no uso la aplicación</option>
+          <option>No quiero que conserven mis datos personales</option>
+          <option>Creé la cuenta por error o tengo una duplicada</option>
+          <option>No estoy conforme con el servicio</option>
+          <option>Otro motivo</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="notes">Comentarios <span style="font-weight:400;color:var(--text-soft)">(opcional)</span></label>
+        <textarea id="notes" placeholder="Cualquier detalle que nos ayude a localizar tu cuenta."></textarea>
+      </div>
+
+      <div class="check">
+        <input type="checkbox" id="confirm" required>
+        <label for="confirm">
+          Entiendo que la eliminación es permanente y que perderé mis puntos
+          y recompensas pendientes de canjear.
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Abrir correo con la solicitud</button>
+      <button type="button" class="btn btn-ghost" id="btn-show">Prefiero copiar el mensaje</button>
+    </form>
+
+    <div class="fallback hidden" id="fallback">
+      <p class="muted">
+        Copia este mensaje y envíalo a
+        <a href="mailto:info@zublime.com.mx">info@zublime.com.mx</a>
+        con el asunto <em>«Solicitud de eliminación de cuenta – PharmaStore»</em>.
+      </p>
+      <pre id="fallback-text"></pre>
+      <button type="button" class="btn btn-ghost" id="btn-copy" style="margin-top:0">Copiar mensaje</button>
+    </div>
+  </section>
+
+  <!-- =============== DATOS =============== -->
+  <section class="card" aria-labelledby="what-title">
+    <h2 id="what-title">Qué ocurre con tus datos</h2>
+
+    <h3>Datos que se eliminan o anonimizan</h3>
+    <ul class="plain">
+      <li>Nombre, correo electrónico y contraseña de acceso.</li>
+      <li>Teléfono, celular y dirección postal completa.</li>
+      <li>Fecha de nacimiento, género, tipo y número de documento de identidad.</li>
+      <li>Fotografía de perfil.</li>
+      <li>Intereses, productos favoritos y lista de deseos.</li>
+      <li>Códigos de verificación y de vinculación asociados a tu correo.</li>
+      <li>Puntos de fidelización y recompensas pendientes de canjear.</li>
+    </ul>
+
+    <h3>Datos que se conservan</h3>
+    <p class="muted">
+      Los comprobantes de compra y los registros contables ligados a tus pedidos se
+      conservan de forma <strong>anonimizada</strong> —desvinculados de tu identidad—
+      porque la legislación fiscal y mercantil aplicable obliga a resguardarlos.
+      No se utilizan para identificarte ni para contactarte.
+    </p>
+
+    <h3>Plazos</h3>
+    <dl class="facts">
+      <div>
+        <dt>Desde la aplicación</dt>
+        <dd>Tu cuenta se desactiva y tu sesión se cierra al confirmar. La anonimización de tus datos personales se completa en los plazos indicados a continuación.</dd>
+      </div>
+      <div>
+        <dt>Hasta 30 días (por correo)</dt>
+        <dd>Verificamos tu identidad y procesamos la solicitud en un plazo máximo de 30 días naturales.</dd>
+      </div>
+      <div>
+        <dt>Hasta 30 días adicionales</dt>
+        <dd>Se completa el purgado de los registros residuales en copias de seguridad y sistemas conectados.</dd>
+      </div>
+      <div>
+        <dt>Según obligación legal</dt>
+        <dd>Los comprobantes fiscales anonimizados se conservan durante el plazo que exige la ley.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="card" aria-labelledby="help-title">
+    <h2 id="help-title">¿Necesitas ayuda?</h2>
+    <p style="margin-bottom:0">
+      Escríbenos a
+      <a href="mailto:info@zublime.com.mx">info@zublime.com.mx</a>
+      y te ayudamos con cualquier duda sobre tu cuenta o tus datos personales.
+    </p>
+  </section>
+
+  <footer class="site">
+    <p style="margin-bottom:4px">Aplicación: <strong>PharmaStore</strong> · Desarrollador: Zublime</p>
+    <p style="margin-bottom:4px">Soporte: <a href="mailto:info@zublime.com.mx">info@zublime.com.mx</a></p>
+    <p style="margin-bottom:4px"><a href="https://victorbravo1999.github.io/pharmastore-privacy/">Política de privacidad</a></p>
+    <p style="margin-bottom:0">Última actualización: 30 de agosto de 2026</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var SOPORTE = "info@zublime.com.mx";
+  var ASUNTO  = "Solicitud de eliminación de cuenta - PharmaStore";
+
+  var $ = function(id){ return document.getElementById(id); };
+  var form = $("form"), fallback = $("fallback");
+
+  function construirMensaje(){
+    var email  = $("email").value.trim();
+    var motivo = $("reason").value;
+    var notas  = $("notes").value.trim();
+
+    var lineas = [
+      "Hola,",
+      "",
+      "Solicito la eliminación permanente de mi cuenta de la aplicación PharmaStore.",
+      "",
+      "Correo de la cuenta: " + email,
+    ];
+    if (motivo) lineas.push("Motivo: " + motivo);
+    if (notas)  lineas.push("Comentarios: " + notas);
+    lineas.push(
+      "",
+      "Confirmo que entiendo que esta acción es permanente y que perderé",
+      "mis puntos y recompensas pendientes de canjear.",
+      "",
+      "Gracias."
+    );
+    return lineas.join("\n");
+  }
+
+  function valido(){
+    // Deja que el navegador muestre sus propios mensajes de validación
+    if (typeof form.reportValidity === "function") return form.reportValidity();
+    return $("email").value.trim() !== "" && $("confirm").checked;
+  }
+
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    if (!valido()) return;
+    window.location.href = "mailto:" + SOPORTE +
+      "?subject=" + encodeURIComponent(ASUNTO) +
+      "&body="    + encodeURIComponent(construirMensaje());
+  });
+
+  $("btn-show").addEventListener("click", function(){
+    if (!valido()) return;
+    $("fallback-text").textContent = construirMensaje();
+    fallback.classList.remove("hidden");
+    fallback.scrollIntoView({ block: "nearest" });
+  });
+
+  $("btn-copy").addEventListener("click", function(){
+    var btn = this, texto = $("fallback-text").textContent;
+
+    function hecho(ok){
+      btn.textContent = ok ? "Mensaje copiado" : "Cópialo manualmente";
+      setTimeout(function(){ btn.textContent = "Copiar mensaje"; }, 2500);
+    }
+
+    if (navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(texto).then(
+        function(){ hecho(true); },
+        function(){ hecho(false); }
+      );
+    } else {
+      // Respaldo para navegadores antiguos o contextos no seguros
+      var ta = document.createElement("textarea");
+      ta.value = texto;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      hecho(ok);
+    }
+  });
+})();
+</script>
+</body>
+</html>
